@@ -77,6 +77,18 @@ const createTables = async () => {
             
 };
 createTables();
+
+const start = async () => {
+  try {
+    await createTables(); // Tutaj kod tworzy tabele w nowym Neonie
+    app.listen(process.env.PORT || 5000, () => console.log("Serwer działa!"));
+  } catch (err) {
+    console.error("Błąd startu:", err);
+  }
+};
+
+start();
+
 //Tworzenie pierwszej testowej sciezki (endpoint) w przegladarce
 app.get('/', (req, res) => {
     res.send('Serwer ChargeShare dziala bez zarzutu');
