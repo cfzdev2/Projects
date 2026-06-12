@@ -16,7 +16,7 @@ function Register() {
 
     try {
       // Wysyłamy żądanie rejestracji do Twojego backendu Node.js
-      await axios.post('http://localhost:5000/api/register', {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/register`, {
         username,
         email,
         password,
