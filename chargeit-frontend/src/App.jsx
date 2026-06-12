@@ -130,7 +130,7 @@ function MainMap() {
 
   const fetchStations = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/stations');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/stations`);
       setStations(response.data.stations || []);
     } catch (error) { console.error("❌ Błąd pobierania stacji:", error); }
   };
@@ -152,7 +152,7 @@ function MainMap() {
     if (!clickCoords) return;
     const currentToken = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:5000/api/stations', {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/stations`, {
         title: formTitle, description: formDesc || "Brak opisu",
         location_lat: clickCoords.lat, location_lng: clickCoords.lng,
         connector_type: formConnector, power_kw: parseFloat(formPower),
@@ -196,7 +196,7 @@ const handleUpdateStation = async (e, id) => {
     // Odseparowujemy dane właściciela konta, aby ich NIE wysyłać na serwer
     const { owner_email, owner_phone_number, ...safeStationData } = editForm;
 
-    await axios.put(`http://localhost:5000/api/stations/${id}`, {
+    await axios.put(`${import.meta.env.VITE_API_URL}/api/stations/${id}`, {
       ...safeStationData, // Wysyłamy tylko bezpieczne dane stacji
       power_kw: parseFloat(editForm.power_kw),
       price_per_kwh: parseFloat(editForm.price_per_kwh),
@@ -213,7 +213,7 @@ const handleUpdateStation = async (e, id) => {
     if (!window.confirm('Usunąć tę stację z mapy?')) return;
     const currentToken = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/api/stations/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/stations/${id}`, {
         headers: { Authorization: `Bearer ${currentToken}` }
       });
       alert('Usunięto.');
@@ -228,7 +228,7 @@ const handleUpdateStation = async (e, id) => {
   if (!window.confirm('Czy na pewno chcesz usunąć tę stację jako Admin?')) return;
   
   try {
-    const res = await fetch(`http://localhost:5000/api/admin/force-delete/${id}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/force-delete/${id}`, {
       method: 'DELETE',
       headers: { 
         'Authorization': `Bearer ${token}` 
