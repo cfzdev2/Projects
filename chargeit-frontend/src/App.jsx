@@ -503,20 +503,20 @@ const handleUpdateStation = async (e, id) => {
     <>
       {/* Wstrzyknięcie animacji pulsowania markerów */}
       <style>{`
-        @keyframes markerPulse {
-          0% {
-            transform: scale(1);
-            opacity: 0.7;
+          @keyframes markerPulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(3); opacity: 0; }
           }
-          100% {
-            transform: scale(3);
-            opacity: 0;
+          .leaflet-container {
+            background: #0d1b2a !important;
           }
-        }
-        .leaflet-container {
-          background: #0d1b2a !important;
-        }
-      `}</style>
+          /* DODAJ TO: Podnosi plus i minus na telefonie */
+          @media (max-width: 600px) {
+            .leaflet-bottom.leaflet-left {
+              bottom: 85px !important;
+            }
+          }
+        `}</style>
 
       <MapContainer center={mapCenter} zoom={mapZoom} key="clean-map" zoomControl={false} style={{ width: '100%', height: '100%' }}>
         <ChangeView center={mapCenter} zoom={mapZoom} />
@@ -599,9 +599,11 @@ const handleUpdateStation = async (e, id) => {
 
       {/* ── FAB: Moje Stacje ───────────────────────────────── */}
       {token && !isSidebarOpen && (
-        <button onClick={() => setIsSettingsOpen(true)} style={S.fab}>
-          <span style={S.fabIcon}>⚙</span> Moje stacje
-          <span style={S.fabBadge}>{myStations.length}</span>
+        <button 
+          onClick={() => setIsSettingsOpen(true)} 
+          style={isMobile ? { ...S.fab, bottom: '85px', right: '10px' } : S.fab}
+        >
+          <span>⚙</span> Moje stacje <strong style={{ marginLeft: '6px', background: '#0a1320', padding: '2px 6px', borderRadius: '10px', fontSize: '11px' }}>{myStations.length}</strong>
         </button>
       )}
 

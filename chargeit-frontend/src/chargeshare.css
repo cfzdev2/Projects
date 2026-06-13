@@ -190,17 +190,18 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
     display: none !important;
   }
 
-  /* ===== STATS (lewy dół) ===== */
-  div[style*="left: 16px"][style*="bottom: 24px"][style*="z-index: 998"] {
-    left: 6px !important;
-    right: 6px !important;
-    bottom: 6px !important;
-    padding: 8px 10px !important;
-    gap: 8px !important;
-    justify-content: space-around !important;
-    border-radius: 12px !important;
-  }
-  div[style*="z-index: 998"] div[style*="font-size: 18px"] { font-size: 15px !important; }
+  
+ /* ===== STATS (lewy dół) ===== */
+div[style*="left: 16px"][style*="bottom: 24px"][style*="z-index: 998"] {
+  left: 6px !important;
+  right: 6px !important;
+  bottom: 25px !important; /* Podniesione z 6px na 25px, żeby uciec przed paskiem Messengera/Safari */
+  padding: 8px 10px !important;
+  gap: 8px !important;
+  justify-content: space-around !important;
+  border-radius: 12px !important;
+}
+div[style*="z-index: 998"] div[style*="font-size: 18px"] { font-size: 15px !important; }
 
   /* ===== FAB „Moje stacje" ===== */
   button[style*="right: 40px"][style*="bottom: 24px"][style*="z-index: 1100"] {
