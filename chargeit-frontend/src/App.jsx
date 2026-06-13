@@ -275,30 +275,45 @@ const handleUpdateStation = async (e, id) => {
     <div style={S.scene}>
       {/* ── górny pływający navbar ─────────────────────────── */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      <header style={isMobile ? { ...S.topbar, display: 'flex', 
-      flexDirection: 'row', 
-      flexWrap: 'nowrap', 
-      justifyContent: 'space-between', 
-      alignItems: 'center',
-      padding: '10px 8px', // Mniejszy padding na boki
-      gap: '5px' } : S.topbar}>
+      <header style={isMobile ? { 
+        ...S.topbar, 
+        display: 'flex', 
+        flexDirection: 'row', 
+        flexWrap: 'nowrap', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        padding: '10px 6px', // Jeszcze delikatnie mniejszy padding na boki
+        gap: '4px' 
+      } : S.topbar}>
+        
         <div style={S.brand}>
           <div style={S.brandMark}>
             <span style={S.brandBolt}>⚡</span>
           </div>
           <div>
             <div style={S.brandName}>ChargeShare</div>
-            <div style={S.brandTag}>Społeczność prywatnych punktów ładowania</div>
+            {/* UKRYWAMY PODTYTUŁ NA MOBILE, ŻEBY ZWOLNIĆ MIEJSCE */}
+            <div style={{ ...S.brandTag, display: isMobile ? 'none' : 'block' }}>
+              Społeczność prywatnych punktów ładowania
+            </div>
           </div>
         </div>
 
-        <div style={S.topbarRight}>
+        {/* TUTAJ: Wymuszamy jeden rząd dla kontenera z przyciskami */}
+        <div style={isMobile ? { 
+          display: 'flex', 
+          flexDirection: 'row', 
+          flexWrap: 'nowrap', 
+          alignItems: 'center', 
+          gap: '4px' 
+        } : S.topbarRight}>
+          
           {token ? (
             <>
               {/* 1. Profil użytkownika (kaczka) */}
-              <div style={S.userChip}>
+              <div style={isMobile ? { ...S.userChip, padding: '4px 6px', gap: '4px' } : S.userChip}>
                 <div style={S.avatar}>{(username || '?').slice(0,1).toUpperCase()}</div>
-                <span style={S.userName}>{username}</span>
+                <span style={isMobile ? { ...S.userName, fontSize: '12px' } : S.userName}>{username}</span>
               </div>
               
               {/* 2. Przycisk Filtruj */}
@@ -307,28 +322,46 @@ const handleUpdateStation = async (e, id) => {
                 style={{
                   ...S.ghostBtn,
                   ...(isFilterBarOpen ? S.ghostBtnActive : null),
+                  ...(isMobile ? { padding: '6px 8px', fontSize: '12px' } : {})
                 }}
               >
-                <span style={{opacity:.85}}>⌕</span> {isFilterBarOpen ? 'Ukryj filtry' : 'Filtruj'}
+                <span style={{opacity:.85}}>⌕</span> {isFilterBarOpen ? 'Ukryj' : 'Filtruj'}
               </button>
 
               {/* 3. Przycisk Wyloguj */}
-              <button onClick={handleLogout} style={S.dangerBtn}>Wyloguj</button>
+              <button 
+                onClick={handleLogout} 
+                style={isMobile ? { ...S.dangerBtn, padding: '6px 8px', fontSize: '12px' } : S.dangerBtn}
+              >
+                Wyloguj
+              </button>
             </>
           ) : (
             <>
-              {/* Układ awaryjny dla niezalogowanego użytkownika: Najpierw opcje konta, potem filtr */}
-              <button onClick={() => navigate('/login')} style={S.ghostBtn}>Zaloguj</button>
-              <button onClick={() => navigate('/register')} style={S.primaryBtn}>Załóż konto</button>
+              {/* Przyciski po wylogowaniu - teraz też dostają mniejszy rozmiar na telefonie */}
+              <button 
+                onClick={() => navigate('/login')} 
+                style={isMobile ? { ...S.ghostBtn, padding: '6px 8px', fontSize: '12px' } : S.ghostBtn}
+              >
+                Zaloguj
+              </button>
+              
+              <button 
+                onClick={() => navigate('/register')} 
+                style={isMobile ? { ...S.primaryBtn, padding: '6px 8px', fontSize: '11px' } : S.primaryBtn}
+              >
+                Załóż konto
+              </button>
               
               <button
                 onClick={() => setIsFilterBarOpen(!isFilterBarOpen)}
                 style={{
                   ...S.ghostBtn,
                   ...(isFilterBarOpen ? S.ghostBtnActive : null),
+                  ...(isMobile ? { padding: '6px 8px', fontSize: '12px' } : {})
                 }}
               >
-                <span style={{opacity:.85}}>⌕</span> {isFilterBarOpen ? 'Ukryj filtry' : 'Filtruj'}
+                <span style={{opacity:.85}}>⌕</span> {isFilterBarOpen ? 'Ukryj' : 'Filtruj'}
               </button>
             </>
           )}
