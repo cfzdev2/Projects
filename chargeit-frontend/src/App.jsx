@@ -310,11 +310,6 @@ const handleUpdateStation = async (e, id) => {
           
           {token ? (
             <>
-              {/* 1. Profil użytkownika (kaczka) */}
-              <div style={isMobile ? { ...S.userChip, padding: '4px 6px', gap: '4px' } : S.userChip}>
-                <div style={S.avatar}>{(username || '?').slice(0,1).toUpperCase()}</div>
-                <span style={isMobile ? { ...S.userName, fontSize: '12px' } : S.userName}>{username}</span>
-              </div>
               
               {/* 2. Przycisk Filtruj */}
               <button
