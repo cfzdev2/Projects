@@ -1,6 +1,7 @@
-/* ChargeShare — globalne style (fonty + override Leaflet) */
-
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* ChargeShare — globalne style (fonty + override Leaflet) */
 
 html, body, #root { margin: 0; padding: 0; height: 100%; background: #0a1320; }
 body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
@@ -58,7 +59,7 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
 *::-webkit-scrollbar-thumb:hover { background: rgba(45,212,168,0.5); }
 *::-webkit-scrollbar-track { background: transparent; }
 
-/* ── Atrybucja Leaflet (mniej rzucająca się) ──────────── */
+/* ── Atrybucja Leaflet ─────────────────────────────────── */
 .leaflet-control-attribution {
   background: rgba(13,27,42,0.7) !important;
   color: #8aa0ad !important;
@@ -68,17 +69,14 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
 }
 .leaflet-control-attribution a { color: #2dd4a8 !important; }
 
-/* ── Zoom control nad panelem statusu (lewy dół) ──────── */
 .leaflet-bottom.leaflet-left .leaflet-control-zoom {
   margin-left: 16px !important;
-  margin-bottom: 104px !important; /* nad panelem "Dostępne / Zajęte / Nieaktywne" */
+  margin-bottom: 104px !important;
 }
 
-
 /* ──────────────────────────────────────────────────────────────
-   MOBILE FIX v2 — wymuszone, nadpisuje style inline z S.*
+   MOBILE FIX v2
    ────────────────────────────────────────────────────────────── */
-
 @media (max-width: 768px) {
   html, body, #root {
     overflow-x: hidden !important;
@@ -87,7 +85,6 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
   }
 
   /* ===== TOPBAR ===== */
-  /* dopasowanie do S.topbar (top:16, left:16, right:16) */
   div[style*="top: 16px"][style*="left: 16px"][style*="right: 16px"][style*="z-index: 1000"] {
     top: 6px !important;
     left: 6px !important;
@@ -97,16 +94,12 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
     flex-wrap: wrap !important;
     gap: 6px !important;
   }
-  /* logo box 42x42 -> 32x32 */
   div[style*="width: 42px"][style*="height: 42px"][style*="border-radius: 12px"] {
     width: 32px !important; height: 32px !important; border-radius: 9px !important;
   }
-  /* nazwa brandu mniejsza */
   div[style*="font-size: 18px"][style*="letter-spacing"] { font-size: 15px !important; }
-  /* tagline „Społeczność..." — ukryj */
   div[style*="font-size: 11px"][style*="margin-top: 1px"] { display: none !important; }
 
-  /* prawa strona topbaru — zawijanie + małe przyciski */
   div[style*="display: flex"][style*="align-items: center"][style*="gap: 10px"] {
     flex-wrap: wrap !important;
     justify-content: flex-end !important;
@@ -116,7 +109,6 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
     padding: 6px 9px !important;
     font-size: 11px !important;
   }
-  /* user chip */
   div[style*="padding: 6px 12px 6px 6px"][style*="border-radius: 999px"] {
     padding: 3px 8px 3px 3px !important;
   }
@@ -145,7 +137,7 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
   div[style*="top: 90px"] select,
   div[style*="top: 90px"] input { width: 100% !important; box-sizing: border-box; }
 
-  /* ===== SIDEBAR (dodawanie) — bottom sheet ===== */
+  /* ===== SIDEBAR — bottom sheet ===== */
   aside[style*="width: 420px"],
   div[style*="width: 420px"][style*="z-index: 1100"] {
     width: 100vw !important;
@@ -160,26 +152,21 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
     padding: 14px !important;
     box-sizing: border-box !important;
   }
-    /* nagłówek sidebara */
   aside[style*="width: 420px"] h2,
   div[style*="width: 420px"] h2 { font-size: 15px !important; margin: 2px 0 0 !important; }
   aside[style*="width: 420px"] [style*="letter-spacing: 1.2px"],
   div[style*="width: 420px"] [style*="letter-spacing: 1.2px"] { font-size: 9px !important; }
 
-  /* coords pill */
   aside[style*="width: 420px"] [style*="border-radius: 999px"][style*="rgba(45, 212, 168"] {
     padding: 3px 8px !important; font-size: 10px !important; margin-bottom: 6px !important;
   }
 
-  /* formularz — mniejsze przerwy */
   aside[style*="width: 420px"] form,
   div[style*="width: 420px"] form { gap: 8px !important; }
 
-  /* etykiety pól */
   aside[style*="width: 420px"] label,
   div[style*="width: 420px"] label { font-size: 9px !important; }
 
-  /* inputy/selecty/textarea */
   aside[style*="width: 420px"] input,
   aside[style*="width: 420px"] select,
   aside[style*="width: 420px"] textarea,
@@ -193,18 +180,16 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
   aside[style*="width: 420px"] textarea,
   div[style*="width: 420px"] textarea { min-height: 48px !important; }
 
-  /* submit */
   aside[style*="width: 420px"] button[type="submit"],
   div[style*="width: 420px"] button[type="submit"] {
     padding: 10px 14px !important; font-size: 13px !important; margin-top: 2px !important;
   }
 
-  /* hint chowamy gdy sidebar otwarty — i tak jest „kliknij na mapie" zbędny */
   aside[style*="width: 420px"] ~ div[style*="max-width: 280px"],
   div[style*="width: 420px"][style*="z-index: 1100"] ~ div[style*="max-width: 280px"] {
     display: none !important;
   }
-}
+
   /* ===== STATS (lewy dół) ===== */
   div[style*="left: 16px"][style*="bottom: 24px"][style*="z-index: 998"] {
     left: 6px !important;
@@ -220,7 +205,7 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
   /* ===== FAB „Moje stacje" ===== */
   button[style*="right: 40px"][style*="bottom: 24px"][style*="z-index: 1100"] {
     right: 10px !important;
-    bottom: 78px !important;          /* nad panelem stats */
+    bottom: 78px !important;
     padding: 9px 14px !important;
     font-size: 12px !important;
   }
@@ -248,7 +233,7 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
   }
   .leaflet-control-attribution { font-size: 9px !important; }
   .cs-popup .leaflet-popup-content-wrapper { max-width: 84vw; }
-
+}
 
 /* bardzo wąskie ekrany */
 @media (max-width: 380px) {
