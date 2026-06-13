@@ -275,7 +275,13 @@ const handleUpdateStation = async (e, id) => {
     <div style={S.scene}>
       {/* ── górny pływający navbar ─────────────────────────── */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      <header style={isMobile ? { ...S.topbar, left: 10, right: 10, padding: '8px 10px' } : S.topbar}>
+      <header style={isMobile ? { ...S.topbar, display: 'flex', 
+      flexDirection: 'row', 
+      flexWrap: 'nowrap', 
+      justifyContent: 'space-between', 
+      alignItems: 'center',
+      padding: '10px 8px', // Mniejszy padding na boki
+      gap: '5px' } : S.topbar}>
         <div style={S.brand}>
           <div style={S.brandMark}>
             <span style={S.brandBolt}>⚡</span>
