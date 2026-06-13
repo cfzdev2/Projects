@@ -76,120 +76,138 @@ body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sa
 
 
 /* ──────────────────────────────────────────────────────────────
-   RESPONSYWNOŚĆ — desktop bez zmian, mobile = skalowanie + układ
+   MOBILE FIX v2 — wymuszone, nadpisuje style inline z S.*
    ────────────────────────────────────────────────────────────── */
 
-/* TABLET (601–900px): trochę luźniej, mniejsze paddingi */
-@media (max-width: 900px) {
-  [style*="width: 420px"] { width: 360px !important; }
-}
+@media (max-width: 768px) {
+  html, body, #root {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
 
-/* MOBILE (≤600px) */
-@media (max-width: 600px) {
-  html { font-size: 14px; }
-
-  /* TOPBAR — kompaktowy, zawijany, mniejszy brand */
-  [style*="top: 16px"][style*="left: 16px"][style*="right: 16px"] {
-    top: 8px !important;
-    left: 8px !important;
-    right: 8px !important;
-    padding: 8px 10px !important;
+  /* ===== TOPBAR ===== */
+  /* dopasowanie do S.topbar (top:16, left:16, right:16) */
+  div[style*="top: 16px"][style*="left: 16px"][style*="right: 16px"][style*="z-index: 1000"] {
+    top: 6px !important;
+    left: 6px !important;
+    right: 6px !important;
+    padding: 6px 8px !important;
     border-radius: 12px !important;
     flex-wrap: wrap !important;
-    gap: 8px !important;
+    gap: 6px !important;
   }
-  /* brandMark mniejszy */
-  [style*="width: 42px"][style*="height: 42px"] {
-    width: 34px !important; height: 34px !important; border-radius: 10px !important;
+  /* logo box 42x42 -> 32x32 */
+  div[style*="width: 42px"][style*="height: 42px"][style*="border-radius: 12px"] {
+    width: 32px !important; height: 32px !important; border-radius: 9px !important;
   }
-  /* ukryj tagline pod logo na mobile */
-  [style*="color: rgb(138, 160, 173)"][style*="margin-top: 1px"] { display: none !important; }
+  /* nazwa brandu mniejsza */
+  div[style*="font-size: 18px"][style*="letter-spacing"] { font-size: 15px !important; }
+  /* tagline „Społeczność..." — ukryj */
+  div[style*="font-size: 11px"][style*="margin-top: 1px"] { display: none !important; }
 
-  /* przyciski w topbarze — mniejsze, zawijane */
-  [style*="display: flex"][style*="gap: 10px"] button,
-  [style*="gap: 10px"] > button {
-    padding: 7px 10px !important;
-    font-size: 12px !important;
+  /* prawa strona topbaru — zawijanie + małe przyciski */
+  div[style*="display: flex"][style*="align-items: center"][style*="gap: 10px"] {
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
   }
-  .userChip, [style*="border-radius: 999px"][style*="padding: 6px 12px 6px 6px"] {
-    padding: 4px 10px 4px 4px !important;
+  div[style*="z-index: 1000"] button {
+    padding: 6px 9px !important;
+    font-size: 11px !important;
   }
+  /* user chip */
+  div[style*="padding: 6px 12px 6px 6px"][style*="border-radius: 999px"] {
+    padding: 3px 8px 3px 3px !important;
+  }
+  div[style*="padding: 6px 12px 6px 6px"] div[style*="width: 28px"] {
+    width: 22px !important; height: 22px !important; font-size: 11px !important;
+  }
+  div[style*="padding: 6px 12px 6px 6px"] span { font-size: 11px !important; }
 
-  /* FILTER DOCK — kolumna, pełna szerokość */
-  [style*="top: 90px"] {
-    top: 92px !important;
-    left: 8px !important;
-    right: 8px !important;
+  /* ===== FILTER DOCK ===== */
+  div[style*="top: 90px"][style*="z-index: 999"] {
+    top: 110px !important;
+    left: 6px !important;
+    right: 6px !important;
     padding: 10px !important;
     border-radius: 12px !important;
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 8px !important;
+    max-height: 70vh;
+    overflow-y: auto;
   }
-  [style*="top: 90px"] [style*="min-width: 260px"] { min-width: 0 !important; width: 100% !important; }
-  [style*="top: 90px"] [style*="width: 1px"] { display: none !important; } /* dividery */
-  [style*="top: 90px"] select,
-  [style*="top: 90px"] input { width: 100% !important; }
-  [style*="top: 90px"] [style*="margin-left: auto"] { margin-left: 0 !important; }
+  div[style*="top: 90px"] > * { width: 100% !important; }
+  div[style*="top: 90px"] div[style*="min-width: 260px"] { min-width: 0 !important; }
+  div[style*="top: 90px"] div[style*="width: 1px"][style*="height: 24px"] { display: none !important; }
+  div[style*="top: 90px"] button[style*="margin-left: auto"] { margin-left: 0 !important; }
+  div[style*="top: 90px"] select,
+  div[style*="top: 90px"] input { width: 100% !important; box-sizing: border-box; }
 
-  /* SIDEBAR (dodawanie) — bottom sheet */
-  [style*="width: 420px"] {
-    width: 100% !important;
+  /* ===== SIDEBAR (dodawanie) — bottom sheet ===== */
+  aside[style*="width: 420px"],
+  div[style*="width: 420px"][style*="z-index: 1100"] {
+    width: 100vw !important;
+    max-width: 100vw !important;
     left: 0 !important;
     right: 0 !important;
     top: auto !important;
     bottom: 0 !important;
-    max-height: 85vh !important;
+    max-height: 88vh !important;
+    height: auto !important;
     border-radius: 18px 18px 0 0 !important;
-    padding: 16px !important;
+    padding: 14px !important;
+    box-sizing: border-box !important;
   }
 
-  /* STATYSTYKI — kompakt, na dole z marginesem na FAB */
-  [style*="left: 16px"][style*="bottom: 24px"] {
-    left: 8px !important;
-    right: 8px !important;
-    bottom: 8px !important;
-    gap: 10px !important;
-    padding: 10px 12px !important;
+  /* ===== STATS (lewy dół) ===== */
+  div[style*="left: 16px"][style*="bottom: 24px"][style*="z-index: 998"] {
+    left: 6px !important;
+    right: 6px !important;
+    bottom: 6px !important;
+    padding: 8px 10px !important;
+    gap: 8px !important;
     justify-content: space-around !important;
+    border-radius: 12px !important;
+  }
+  div[style*="z-index: 998"] div[style*="font-size: 18px"] { font-size: 15px !important; }
+
+  /* ===== FAB „Moje stacje" ===== */
+  button[style*="right: 40px"][style*="bottom: 24px"][style*="z-index: 1100"] {
+    right: 10px !important;
+    bottom: 78px !important;          /* nad panelem stats */
+    padding: 9px 14px !important;
+    font-size: 12px !important;
+  }
+  button[style*="z-index: 1100"] span[style*="background"][style*="border-radius: 999px"] {
+    padding: 1px 7px !important; font-size: 11px !important;
   }
 
-  /* FAB — mniejszy, nad statystykami */
-  [style*="right: 40px"][style*="bottom: 24px"] {
-    right: 12px !important;
-    bottom: 84px !important;
-    padding: 10px 14px !important;
-    font-size: 13px !important;
+  /* ===== Hint bubble ===== */
+  div[style*="right: 24px"][style*="bottom: 24px"][style*="max-width: 280px"] {
+    left: 6px !important; right: 6px !important; bottom: 78px !important;
+    max-width: none !important; text-align: center; font-size: 12px !important;
   }
 
-  /* hint bubble — chowamy żeby nie zaśmiecał */
-  [style*="right: 24px"][style*="bottom: 24px"][style*="max-width: 280px"] {
-    left: 8px !important; right: 8px !important; bottom: 84px !important;
-    max-width: none !important; text-align: center;
-  }
-
-  /* MODAL „Moje stacje" — pełny ekran */
-  [style*="max-width: 620px"] {
+  /* ===== Modal „Moje stacje" ===== */
+  div[style*="max-width: 620px"] {
     max-width: 100% !important;
     max-height: 92vh !important;
     border-radius: 14px !important;
   }
 
-  /* Leaflet zoom — wyżej, żeby nie zachodził na panel statystyk */
+  /* ===== Leaflet ===== */
   .leaflet-bottom.leaflet-left .leaflet-control-zoom {
-    margin-bottom: 96px !important;
-    margin-left: 10px !important;
+    margin-bottom: 78px !important;
+    margin-left: 8px !important;
   }
   .leaflet-control-attribution { font-size: 9px !important; }
-
-  /* Popup — węższy */
-  .cs-popup .leaflet-popup-content-wrapper { max-width: 86vw; }
-  .cs-popup .leaflet-popup-content { margin: 12px 14px; }
+  .cs-popup .leaflet-popup-content-wrapper { max-width: 84vw; }
 }
 
-/* Bardzo małe ekrany */
+/* bardzo wąskie ekrany */
 @media (max-width: 380px) {
-  [style*="top: 16px"][style*="left: 16px"][style*="right: 16px"] [style*="font-size: 18px"] {
-    font-size: 16px !important;
-  }
+  div[style*="z-index: 1000"] button { font-size: 10px !important; padding: 5px 7px !important; }
+  div[style*="font-size: 18px"][style*="letter-spacing"] { font-size: 14px !important; }
 }
