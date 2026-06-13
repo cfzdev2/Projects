@@ -264,8 +264,10 @@ const handleUpdateStation = async (e, id) => {
     status === 'Nieaktywna' ? '#ff6b6b' : '#2dd4a8';
 
   return (
+    
     <div style={S.scene}>
       {/* ── górny pływający navbar ─────────────────────────── */}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <header style={S.topbar}>
         <div style={S.brand}>
           <div style={S.brandMark}>
